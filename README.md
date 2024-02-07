@@ -1,2 +1,2 @@
 # JokeTeller
- The names says it all
+Just created an app that uses sv443.net's jokeapi api to get jokes and Android's TextToSpeech to say them.

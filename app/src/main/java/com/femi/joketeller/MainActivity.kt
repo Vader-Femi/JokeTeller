@@ -133,14 +133,14 @@ fun Home() {
                                         val responseBody = response.body()
                                         joke = if (responseBody?.setup == null || responseBody.delivery == null){
                                             if (responseBody?.joke == null)
-                                                "Your love life"
+                                                "Cannot get joke, so the joke is...Your love life"
                                             else
                                                 responseBody.joke
                                         } else{
                                             "${responseBody.setup} ... ${responseBody.delivery}"
                                         }
 
-                                        textToSpeech.speak(joke, TextToSpeech.QUEUE_FLUSH, null, null)
+                                        textToSpeech.speak(joke, TextToSpeech.QUEUE_ADD, null, null)
                                     } else {
                                         textToSpeech.speak("An error occurred ${response.errorBody()}", TextToSpeech.QUEUE_FLUSH, null, null)
                                         Toast.makeText(
