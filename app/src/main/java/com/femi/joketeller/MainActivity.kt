@@ -161,7 +161,7 @@ fun Home() {
                         },
                         shape = AbsoluteRoundedCornerShape(12.dp)
                     ) {
-                        Text(text = "Get Joke")
+                        Text(text = "Get a new Joke")
                     }
                 }
 
@@ -196,6 +196,6 @@ object ApiClient {
 }
 
 interface ApiService {
-    @GET("jokeapi/v2/joke/{category}")
+    @GET("jokeapi/v2/joke/{category}?blacklistFlags=nsfw,racist,sexist")
     fun getJoke(@Path("category") category: String): Call<Joke>
 }
