@@ -1,7 +1,6 @@
 package com.femi.joketeller
 
 import android.os.Bundle
-import android.speech.SpeechRecognizer
 import android.speech.tts.TextToSpeech
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -42,7 +41,6 @@ import retrofit2.http.Path
 import java.util.Locale
 
 private lateinit var textToSpeech: TextToSpeech
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -125,8 +123,8 @@ fun Home() {
                     Button(
                         onClick = {
 
-                            val call = ApiClient.apiService.getJoke(selectedOption)
 
+                            val call = ApiClient.apiService.getJoke(selectedOption)
                             call.enqueue(object : Callback<Joke> {
                                 override fun onResponse(call: Call<Joke>, response: Response<Joke>) {
                                     if (response.isSuccessful) {
@@ -142,21 +140,24 @@ fun Home() {
 
                                         textToSpeech.speak(joke, TextToSpeech.QUEUE_ADD, null, null)
                                     } else {
-                                        textToSpeech.speak("An error occurred ${response.errorBody()}", TextToSpeech.QUEUE_FLUSH, null, null)
+                                        textToSpeech.speak("Wahala wahala ${response.errorBody()}", TextToSpeech.QUEUE_FLUSH, null, null)
                                         Toast.makeText(
                                             context,
-                                            "An error occurred ${response.errorBody()}",
+                                            "Wahala wahala ${response.errorBody()}",
                                             Toast.LENGTH_SHORT
                                         ).show()
                                     }
                                 }
 
                                 override fun onFailure(call: Call<Joke>, t: Throwable) {
-                                    textToSpeech.speak("Unable to get joke. Maybe check your network", TextToSpeech.QUEUE_FLUSH, null, null)
+                                    textToSpeech.speak("Your network is bad dear", TextToSpeech.QUEUE_FLUSH, null, null)
+                                    Toast.makeText(
+                                        context,
+                                        "Your network is bad o",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
                             })
-
-
 
                         },
                         shape = AbsoluteRoundedCornerShape(12.dp)
